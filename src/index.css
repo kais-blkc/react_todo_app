@@ -1,10 +1,187 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google fonts imports */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+
+@layer components {
+  body {
+    @apply
+    p-0
+    text-slate-700
+    ;
+  }
+
+  h1 {
+    @apply
+    text-5xl 
+    font-semibold 
+    text-center
+    mb-8
+    ;
+  }
+
+  .input-task {
+    @apply
+    flex
+    gap-3
+    h-10
+    items-center
+    my-4  
+    ;
+  }
+
+  .sky-input {
+    @apply 
+    px-2
+    w-full 
+    h-full
+    border-solid 
+    border-2 
+    border-sky-500 
+    rounded-lg
+    focus:outline-none
+    focus:ring
+    focus:ring-sky-200
+    bg-transparent
+    transition-all
+    placeholder:text-slate-500
+    ;
+  }
+
+  .sky-btn {
+    @apply
+    p-3
+    h-full
+    border-none
+    bg-sky-700
+    text-white
+    rounded-lg
+    font-semibold
+    flex
+    items-center
+    transition-all
+    hover:opacity-80
+    focus:outline-none
+    focus:opacity-90
+    active:scale-95
+    ;
+  }
+
+  .tasks-info {
+    @apply
+    mt-12
+  }
+
+  .tasks-list {
+    @apply
+    py-4
+    border-slate-400
+    flex
+    flex-col
+    space-y-3
+    ;
+  }
+
+  .tasks-list .tasks-empty {
+    @apply
+    text-slate-500
+    ;
+  }
+
+  .tasks-list__item {
+    @apply
+    p-4
+    border-slate-300
+    rounded-lg
+    flex
+    items-start
+    bg-white/50
+    relative
+  }
+  .tasks-list__item svg {
+    @apply
+    w-5
+    h-5
+    text-slate-600
+    hover:opacity-80
+    transition-all
+    active:scale-75
+  }
+
+  .tasks-list__item button {
+    @apply
+    flex
+    items-center
+    h-6
+  }
+  .tasks-list__item-delete {
+    @apply
+    absolute
+    right-4
+  }
+  .tasks-list__item-delete svg {
+    @apply
+    hover:text-red-500/80
+  }
+  .tasks-list__item-check,
+  .tasks-list__item-checked {
+    @apply
+    mr-3
+  }
+
+  .tasks-list__item-edit {
+    @apply
+    absolute
+    right-12
+    opacity-0
+    hidden
+    opacity-0
+    transition-all
+  }
+}
+
+*, *::before, *::after {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Source Code Pro', monospace;
+  padding: 25px 0;
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+body::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  /* background: center / 300% no-repeat url('./img/bg2.jpg'); */
+  background-image: linear-gradient(45deg, #f5fbff, #ecf5fc, #e5effa, #dde9f7, #d7e3f5, #d5e2f5, #d4e1f6, #d2e0f6, #d4e5f8, #d7e9fb, #daeefd, #def2ff);
+  background-size: 500%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  animation-name: bg-animation;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+
+}
+@keyframes bg-animation {
+  0% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 code {

@@ -1,0 +1,7 @@
+{
+  "singleQuote": true,
+  "semi": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "singleAttributePerLine": true
+}
