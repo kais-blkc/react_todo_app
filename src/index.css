@@ -100,6 +100,13 @@
     items-start
     bg-white/50
     relative
+    justify-between
+  }
+  
+  .tasks-list__item div {
+    @apply
+    flex
+    gap-x-3
   }
   .tasks-list__item svg {
     @apply
@@ -116,30 +123,67 @@
     flex
     items-center
     h-6
-  }
-  .tasks-list__item-delete {
-    @apply
-    absolute
-    right-4
+    transition-all
   }
   .tasks-list__item-delete svg {
     @apply
     hover:text-red-500/80
-  }
-  .tasks-list__item-check,
-  .tasks-list__item-checked {
-    @apply
-    mr-3
+    transition-all
   }
 
-  .tasks-list__item-edit {
+  .tasks-list__item-left {
     @apply
-    absolute
-    right-12
-    opacity-0
-    hidden
-    opacity-0
+    w-full
+    pr-6
+  }
+
+  .tasks-list__item-text {
+    @apply
+    relative
+    w-full
     transition-all
+  }
+  .tasks-list__item-text input {
+    @apply
+    rounded-md
+    px-2
+    transition-all
+    focus:ring-2
+    focus:ring-sky-200
+    outline-none
+    w-full
+  }
+
+  .tasks-list__item-text input:read-only {
+    @apply
+    bg-transparent
+    px-0
+    focus:ring-0
+    no-underline
+  }
+
+  /* Task Done styles =============== */
+  .tasks-list__item.task-done .tasks-list__item-text {
+    @apply
+    opacity-75
+  }
+
+  .tasks-list__item-text::before {
+    content: '';
+    display: block;
+    width: 0%;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    @apply
+    bg-slate-700
+    transition-all
+    rounded-sm
+  }
+
+  .tasks-list__item.task-done .tasks-list__item-text::before {
+    width: 100%;
   }
 }
 
