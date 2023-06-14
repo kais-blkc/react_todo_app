@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux';
 import TasksInfo from './TasksInfo';
 import TasksItem from './TasksItem';
 
-export default function TasksList({ tasks, checkTask, removeTask }) {
+export default function TasksList() {
+  const tasks = useSelector((state) => state.tasks.tasksList);
+
   let tasksList = (
     <p className="tasks-empty">
       У вас еще нет зарегистрированных задач
@@ -15,8 +18,8 @@ export default function TasksList({ tasks, checkTask, removeTask }) {
       <TasksItem
         key={index}
         item={item}
-        checkTask={checkTask}
-        removeTask={removeTask}
+        // checkTask={checkTask}
+        // removeTask={removeTask}
       />
     ));
   }

@@ -1,6 +1,10 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../../redux/tasksSlice';
 
-export default function InputTask({ tasks, addTask }) {
+export default function InputTask() {
+  const dispatch = useDispatch();
+
   const inputPlaceholderText = 'Добавить новую задачу';
   const [inputVal, setInputVal] = useState('');
   const [inputClasses, setInputClasses] = useState('');
@@ -14,7 +18,7 @@ export default function InputTask({ tasks, addTask }) {
   function buttonHandler() {
     if (!inputValid()) return;
 
-    addTask({ id: tasks.length + 1, task: inputVal, check: false });
+    dispatch(addTask(inputVal));
     setInputVal('');
   }
 

@@ -5,17 +5,20 @@ import { faCircle } from '@fortawesome/free-regular-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { checkTask, removeTask, tasksRemove } from '../../redux/tasksSlice';
 
-export default function TasksItem({ item, checkTask, removeTask }) {
+export default function TasksItem({ item }) {
   const [taskVal, setTaskVal] = useState(item.task);
   const [editable, setEditable] = useState(false);
+  const dispatch = useDispatch();
 
   function checkHandler(id) {
-    checkTask(id);
+    dispatch(checkTask(id));
   }
 
   function removeHandler(id) {
-    removeTask(id);
+    dispatch(removeTask(id));
   }
 
   function editHandler(id) {
