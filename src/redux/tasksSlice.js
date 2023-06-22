@@ -1,39 +1,47 @@
 import { createSlice } from '@reduxjs/toolkit';
+const localStorageList = JSON.parse(localStorage.getItem('tasks')) || [];
 
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
-    tasksList: [
-      { id: 1, task: 'one', check: false },
-      { id: 2, task: 'two', check: false },
-      { id: 3, task: 'three', check: false },
-    ],
+    tasksList: localStorageList,
   },
   reducers: {
     addTask: (state, task) => {
       state.tasksList.push({
-        id: state.tasksList.length + 1,
+        // order: state.tasksList.length + 1,
+        id: String(state.tasksList.length + 1),
         task: task.payload,
         check: false,
       });
+      tasksSlice.caseReducers.updateLocalStorageTasks(state);
     },
     removeTask: (state, taskId) => {
-      const updatedTasks = state.tasksList.filter(
-        (f) => f.id !== taskId.payload
-      );
-
-      state.tasksList = updatedTasks;
+      state.tasksList = state.tasksList.filter((f) => f.id !== taskId.payload);
+      tasksSlice.caseReducers.updateLocalStorageTasks(state);
+    },
+    updateTask: (state, curTask) => {
+      state.tasksList.forEach((t) => {
+        if (t.id === curTask.payload.id) t.task = curTask.payload.taskVal;
+      });
+      tasksSlice.caseReducers.updateLocalStorageTasks(state);
     },
     checkTask: (state, taskId) => {
-      const updatedTasks = state.tasksList.map((task) => {
-        if (task.id === taskId.payload) task.check = !task.check;
-        return task;
+      state.tasksList.forEach((t) => {
+        if (t.id === taskId.payload) t.check = !t.check;
       });
-
-      state.tasksList = updatedTasks;
+      tasksSlice.caseReducers.updateLocalStorageTasks(state);
+    },
+    updateLocalStorageTasks: (state) => {
+      localStorage.setItem('tasks', JSON.stringify(state.tasksList));
+    },
+    updateTasksList: (state, newTasksList) => {
+      state.tasksList = newTasksList.payload;
+      tasksSlice.caseReducers.updateLocalStorageTasks(state);
     },
   },
 });
 
-export const { addTask, removeTask, checkTask } = tasksSlice.actions;
+export const { addTask, removeTask, updateTask, checkTask, updateTasksList } =
+  tasksSlice.actions;
 export default tasksSlice.reducer;

@@ -1,6 +1,7 @@
 import './App.css';
 import InputTask from './components/InputTask/InputTask';
 import TasksList from './components/TasksList/TasksList';
+import TestDnd from './components/TestDnd';
 
 function App() {
   return (
@@ -10,6 +11,8 @@ function App() {
         <InputTask />
         <TasksList />
       </div>
+
+      {/* <TestDnd /> */}
     </div>
   );
 }

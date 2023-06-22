@@ -10,7 +10,8 @@
   body {
     @apply
     p-0
-    text-slate-700
+    /* text-slate-700 */
+    text-slate-50
     ;
   }
 
@@ -47,7 +48,7 @@
     focus:ring-sky-200
     bg-transparent
     transition-all
-    placeholder:text-slate-500
+    placeholder:text-slate-400
     ;
   }
 
@@ -73,6 +74,10 @@
   .tasks-info {
     @apply
     mt-12
+    flex
+    justify-between
+    flex-wrap
+    gap-3
   }
 
   .tasks-list {
@@ -87,20 +92,34 @@
 
   .tasks-list .tasks-empty {
     @apply
-    text-slate-500
+    text-slate-400
+    text-center
+    mt-12
+    text-xl
     ;
   }
 
   .tasks-list__item {
     @apply
     p-4
-    border-slate-300
+    border-sky-400
+    /* border-2 */
     rounded-lg
     flex
     items-start
-    bg-white/50
+    bg-white/20
+    backdrop-blur-sm
     relative
     justify-between
+    transition-all
+    /* cursor-grab
+    scale-100 */
+  }
+
+  .tasks-list__item.over {
+    @apply
+    bg-white
+    scale-110
   }
   
   .tasks-list__item div {
@@ -112,7 +131,7 @@
     @apply
     w-5
     h-5
-    text-slate-600
+    text-sky-700
     hover:opacity-80
     transition-all
     active:scale-75
@@ -152,6 +171,7 @@
     focus:ring-sky-200
     outline-none
     w-full
+    bg-black/50
   }
 
   .tasks-list__item-text input:read-only {
@@ -160,16 +180,17 @@
     px-0
     focus:ring-0
     no-underline
+    cursor-default
   }
 
   /* Task Done styles =============== */
   .tasks-list__item.task-done .tasks-list__item-text {
     @apply
-    opacity-75
+    opacity-50
   }
 
   .tasks-list__item-text::before {
-    content: '';
+    /* content: ''; */
     display: block;
     width: 0%;
     height: 2px;
@@ -198,6 +219,7 @@ body {
   padding: 25px 0;
   margin: 0;
   min-height: 100vh;
+  background: center / cover no-repeat url('img/anim-bg.gif') #f5fbff;
   position: relative;
   z-index: 1;
 }
@@ -205,27 +227,12 @@ body::before {
   content: '';
   width: 100%;
   height: 100%;
-  /* background: center / 300% no-repeat url('./img/bg2.jpg'); */
-  background-image: linear-gradient(45deg, #f5fbff, #ecf5fc, #e5effa, #dde9f7, #d7e3f5, #d5e2f5, #d4e1f6, #d2e0f6, #d4e5f8, #d7e9fb, #daeefd, #def2ff);
-  background-size: 500%;
   position: absolute;
+  background: #000;
+  opacity: 0.95;
   left: 0;
   top: 0;
   z-index: -1;
-  animation-name: bg-animation;
-  animation-timing-function: linear;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate-reverse;
-
-}
-@keyframes bg-animation {
-  0% {
-    background-position: 100% 0%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
 }
 
 code {
