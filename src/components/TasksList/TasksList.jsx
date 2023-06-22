@@ -1,4 +1,4 @@
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 import TasksInfo from './TasksInfo';
 import TasksItem from './TasksItem';
@@ -8,7 +8,6 @@ import { updateTasksList } from '../../redux/tasksSlice';
 export default function TasksList() {
   const tasks = useSelector((state) => state.tasks.tasksList);
   const dispatch = useDispatch();
-  // debugger;
 
   function onDragEndHandler(result) {
     if (!result.destination) return;
@@ -20,23 +19,21 @@ export default function TasksList() {
     dispatch(updateTasksList(items));
   }
 
-  let tasksList = (
+  let tasksList = tasks.length ? (
+    tasks.map((item, index) => (
+      <TasksItem
+        key={item.id}
+        item={item}
+        index={index}
+      />
+    ))
+  ) : (
     <p className="tasks-empty">
       У вас еще нет зарегистрированных задач
       <br />
       Создавайте задачи и организуйте свои дела
     </p>
   );
-
-  if (tasks.length) {
-    tasksList = tasks.map((item, index) => (
-      <TasksItem
-        key={index}
-        item={item}
-        index={index}
-      />
-    ));
-  }
 
   return (
     <>

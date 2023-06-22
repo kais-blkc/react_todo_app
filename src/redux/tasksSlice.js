@@ -9,7 +9,6 @@ const tasksSlice = createSlice({
   reducers: {
     addTask: (state, task) => {
       state.tasksList.push({
-        // order: state.tasksList.length + 1,
         id: String(state.tasksList.length + 1),
         task: task.payload,
         check: false,
