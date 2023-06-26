@@ -10,8 +10,6 @@ function App() {
         <InputTask />
         <TasksList />
       </div>
-
-      {/* <TestDnd /> */}
     </div>
   );
 }

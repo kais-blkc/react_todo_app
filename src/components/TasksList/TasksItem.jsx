@@ -1,11 +1,15 @@
 /* Icons */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { faCircle } from '@fortawesome/free-regular-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faGripLines } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircle,
+  faPenToSquare,
+  faCircleXmark,
+} from '@fortawesome/free-regular-svg-icons';
+import {
+  faCheck,
+  faCircleCheck,
+  faGripLines,
+} from '@fortawesome/free-solid-svg-icons';
 /* Icons */
 
 import { useState } from 'react';
@@ -42,17 +46,7 @@ export default function TasksItem({ item, index }) {
   }
 
   let taskListItemClasses = item.check ? ' task-done' : '';
-  let taskListItemContent = editable ? (
-    <input
-      type="text"
-      value={taskVal}
-      readOnly={!editable}
-      onChange={taskChangeHandler}
-      onKeyDown={(e) => taskKeyDownHandler(e, item.id)}
-    />
-  ) : (
-    item.task
-  );
+  taskListItemClasses += editable ? ' task-edit-mode' : '';
 
   return (
     <Draggable
@@ -81,7 +75,15 @@ export default function TasksItem({ item, index }) {
               )}
             </button>
 
-            <div className="tasks-list__item-text">{taskListItemContent}</div>
+            <div className="tasks-list__item-text">
+              <input
+                type="text"
+                value={taskVal}
+                onChange={taskChangeHandler}
+                onKeyDown={(e) => taskKeyDownHandler(e, item.id)}
+              />
+              <p>{item.task}</p>
+            </div>
           </div>
 
           <div className="tasks-list__item-right">

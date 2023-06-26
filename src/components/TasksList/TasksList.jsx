@@ -4,6 +4,7 @@ import TasksInfo from './TasksInfo';
 import TasksItem from './TasksItem';
 import { useDispatch } from 'react-redux';
 import { updateTasksList } from '../../redux/tasksSlice';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 export default function TasksList() {
   const tasks = useSelector((state) => state.tasks.tasksList);
@@ -20,13 +21,21 @@ export default function TasksList() {
   }
 
   let tasksList = tasks.length ? (
-    tasks.map((item, index) => (
-      <TasksItem
-        key={item.id}
-        item={item}
-        index={index}
-      />
-    ))
+    <TransitionGroup>
+      {tasks.map((item, index) => (
+        <CSSTransition
+          key={item.id}
+          timeout={500}
+          classNames="fade-effect"
+        >
+          <TasksItem
+            key={item.id}
+            item={item}
+            index={index}
+          />
+        </CSSTransition>
+      ))}
+    </TransitionGroup>
   ) : (
     <p className="tasks-empty">
       У вас еще нет зарегистрированных задач

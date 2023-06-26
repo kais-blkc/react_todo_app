@@ -17,10 +17,12 @@
 
   h1 {
     @apply
-    text-5xl 
+    text-4xl 
     font-semibold 
     text-center
     mb-8
+
+    md:text-5xl
     ;
   }
 
@@ -183,16 +185,39 @@
     w-full
     transition-all
   }
+
+  .tasks-list__item .tasks-list__item-text p {
+    @apply
+    transition-all
+    opacity-100
+    relative
+  }
+  .tasks-list__item.task-edit-mode .tasks-list__item-text p {
+    @apply
+    opacity-0
+  }
+  .tasks-list__item.task-edit-mode .tasks-list__item-text input {
+    @apply
+    opacity-100
+    visible
+    left-0
+  }
+  
   .tasks-list__item-text input {
     @apply
     rounded-md
     px-2
-    transition-all
     focus:ring-2
     focus:ring-sky-200
     outline-none
     w-full
     bg-black/50
+
+    transition-all
+    opacity-0
+    absolute
+    invisible
+    -left-3
   }
 
   .tasks-list__item-text input:read-only {
@@ -204,12 +229,11 @@
   }
 
   /* Task Done styles =============== */
-  .tasks-list__item.task-done .tasks-list__item-text {
+  .tasks-list__item.task-done .tasks-list__item-text p {
     @apply
     opacity-50
   }
-
-  .tasks-list__item-text::before {
+  .tasks-list__item-text p::before {
     /* content: ''; */
     display: block;
     width: 0%;
@@ -218,14 +242,28 @@
     top: 50%;
     left: 0;
     @apply
-    bg-slate-700
+    bg-slate-200
     transition-all
     rounded-sm
   }
-
-  .tasks-list__item.task-done .tasks-list__item-text::before {
+  .tasks-list__item.task-done .tasks-list__item-text p::before {
     width: 100%;
   }
+
+  .tasks-info__count {
+    @apply
+    text-xl
+    flex
+    items-center
+    gap-2
+  }
+  .tasks-info__count svg {
+    @apply
+    w-5
+    h-5
+    opacity-75
+  }
+
 }
 
 *, *::before, *::after {
@@ -258,4 +296,38 @@ body::before {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Animations =============== */
+.fade-effect-enter {}
+.fade-effect-exit {}
+
+.fade-effect-enter-active {
+  transition: all .5s ease;
+  animation: fade-in 500ms forwards ; /* delay iteration-count direction fill-mode */
+}
+.fade-effect-exit-active {
+  transition: all .5s ease;
+  animation: fade-out 500ms forwards ; /* delay iteration-count direction fill-mode */
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    margin-left: -100px;
+  }
+  100% {
+    opacity: 1;
+    margin-left: 0;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    margin-left: 0;
+  }
+  100% {
+    opacity: 0;
+    margin-left: 100px;
+  }
 }
