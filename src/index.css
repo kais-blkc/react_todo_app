@@ -250,6 +250,13 @@
     width: 100%;
   }
 
+  .tasks-list__item.task-done .tasks-list__item-edit,
+  .tasks-list__item.task-edit-mode .tasks-list__item-checked {
+    @apply
+    opacity-50
+    cursor-default
+  }
+
   .tasks-info__count {
     @apply
     text-xl

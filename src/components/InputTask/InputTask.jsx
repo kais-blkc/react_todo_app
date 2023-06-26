@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../../redux/tasksSlice';
+import soundOff from '../../sounds/pop-up-off.mp3';
+import useSound from 'use-sound';
 
 export default function InputTask() {
   const dispatch = useDispatch();
-
   const inputPlaceholderText = 'Добавить новую задачу';
   const [inputVal, setInputVal] = useState('');
   const [inputClasses, setInputClasses] = useState('');
   const [inputPlaceholder, setInputPlaceholder] =
     useState(inputPlaceholderText);
+  const [playOff] = useSound(soundOff);
 
   function inputChangeHandler(e) {
     setInputVal(e.target.value);
@@ -20,6 +22,7 @@ export default function InputTask() {
 
     dispatch(addTask(inputVal));
     setInputVal('');
+    playOff();
   }
 
   function keyDownHandler(e) {

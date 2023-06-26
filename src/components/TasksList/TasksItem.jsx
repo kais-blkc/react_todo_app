@@ -11,6 +11,12 @@ import {
   faGripLines,
 } from '@fortawesome/free-solid-svg-icons';
 /* Icons */
+/* Sounds */
+import soundActive from '../../sounds/pop-down.mp3';
+import soundOn from '../../sounds/pop-up-on.mp3';
+import soundOff from '../../sounds/pop-up-off.mp3';
+/* Sounds */
+import useSound from 'use-sound';
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -21,8 +27,12 @@ export default function TasksItem({ item, index }) {
   const [taskVal, setTaskVal] = useState(item.task);
   const [editable, setEditable] = useState(false);
   const dispatch = useDispatch();
+  const [playActive] = useSound(soundActive);
+  const [playOn] = useSound(soundOn);
+  const [playOff] = useSound(soundOff);
 
   function checkHandler(id) {
+    if (editable) return;
     dispatch(checkTask(id));
   }
 
@@ -31,6 +41,8 @@ export default function TasksItem({ item, index }) {
   }
 
   function editHandler(id) {
+    if (item.check) return;
+
     if (editable === true) {
       dispatch(updateTask({ id, taskVal }));
     }
@@ -43,6 +55,14 @@ export default function TasksItem({ item, index }) {
 
   function taskKeyDownHandler(e, itemId) {
     if (e.key === 'Enter') editHandler(itemId);
+  }
+
+  function onMouseUpHandler() {
+    if (item.check) {
+      playOn();
+    } else {
+      playOff();
+    }
   }
 
   let taskListItemClasses = item.check ? ' task-done' : '';
@@ -67,6 +87,8 @@ export default function TasksItem({ item, index }) {
             <button
               className="tasks-list__item-checked"
               onClick={() => checkHandler(item.id)}
+              onMouseDown={playActive}
+              onMouseUp={onMouseUpHandler}
             >
               {item.check ? (
                 <FontAwesomeIcon icon={faCircleCheck} />
@@ -87,18 +109,16 @@ export default function TasksItem({ item, index }) {
           </div>
 
           <div className="tasks-list__item-right">
-            {!item.check && (
-              <button
-                className="tasks-list__item-edit"
-                onClick={() => editHandler(item.id)}
-              >
-                {editable ? (
-                  <FontAwesomeIcon icon={faCheck} />
-                ) : (
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                )}
-              </button>
-            )}
+            <button
+              className="tasks-list__item-edit"
+              onClick={() => editHandler(item.id)}
+            >
+              {editable ? (
+                <FontAwesomeIcon icon={faCheck} />
+              ) : (
+                <FontAwesomeIcon icon={faPenToSquare} />
+              )}
+            </button>
 
             <button
               className="tasks-list__item-delete"
