@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/kais-blkc/react_todo_app/static/css/main.54aeaa93.css",
+    "main.js": "/kais-blkc/react_todo_app/static/js/main.8e3e733d.js",
+    "static/media/anim-bg.gif": "/kais-blkc/react_todo_app/static/media/anim-bg.faee7bccac2ddfcb5467.gif",
+    "index.html": "/kais-blkc/react_todo_app/index.html",
+    "main.54aeaa93.css.map": "/kais-blkc/react_todo_app/static/css/main.54aeaa93.css.map",
+    "main.8e3e733d.js.map": "/kais-blkc/react_todo_app/static/js/main.8e3e733d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.54aeaa93.css",
+    "static/js/main.8e3e733d.js"
+  ]
+}
