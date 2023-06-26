@@ -1,5 +1,8 @@
 # To Do App
 
+## App preview/gh-pages link
+https://kais-blkc.github.io/react_todo_app/
+
 ## Project setup
 
 ```
