@@ -3,6 +3,8 @@
 ## App preview
 https://kais-blkc.github.io/react_todo_app/
 
+![Todo app](./preview.png)
+
 ## Project setup
 ```
 npm install
